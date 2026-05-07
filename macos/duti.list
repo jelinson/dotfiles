@@ -1,7 +1,96 @@
-# Default-app associations for `duti -v duti.list`.
-# Format: <bundle-id> <UTI-or-extension> <role>
-# Example:
-#   com.sublimetext.4 .md all
-#   com.google.Chrome public.html viewer
+# Default-app associations. Applied by bootstrap.sh via:
+#   duti -v macos/duti.list
 #
-# Populate once you decide which extensions you want pinned.
+# Format (one per line, whitespace-separated):
+#   <bundle-id> <UTI-or-extension> <role>
+# Roles: all | viewer | editor | shell | none
+#
+# Bare tokens like `py` are interpreted as file extensions; dotted tokens
+# like `public.plain-text` are interpreted as UTIs. Cascading shortcut:
+# setting com.apple.default-app.web-browser / .mail-client covers most
+# http/https/mailto/.html cases in one line.
+#
+# Only deliberate user choices live here. Skip:
+#   - URL schemes auto-claimed by an app's installer (zoom://, iterm2://,
+#     claude://, github-mac://, xcdoc://, etc) — those re-register on reinstall.
+#   - Apple's own first-party defaults (Calendar/Reminders for .ics, etc).
+
+# --- Default browser (covers http/https/.html/.xhtml/.url + mailto) ---
+com.google.chrome  com.apple.default-app.web-browser  all
+com.google.chrome  com.apple.default-app.mail-client  all
+com.google.chrome  http                               all
+com.google.chrome  https                              all
+com.google.chrome  mailto                             all
+com.google.chrome  public.html                        all
+com.google.chrome  public.xhtml                       all
+com.google.chrome  public.url                         viewer
+
+# --- Images and PDFs -> Preview ---
+com.apple.Preview  pdf    all
+com.apple.Preview  jpg    all
+com.apple.Preview  jpeg   all
+com.apple.Preview  png    all
+com.apple.Preview  gif    all
+com.apple.Preview  heic   all
+com.apple.Preview  heif   all
+com.apple.Preview  tif    all
+com.apple.Preview  tiff   all
+com.apple.Preview  bmp    all
+com.apple.Preview  webp   all
+com.apple.Preview  svg    all
+
+# --- Plain text + CSV -> Sublime ---
+com.sublimetext.4  public.plain-text                  all
+com.sublimetext.4  csv                                all
+
+# --- Source code -> VS Code ---
+# C / C++
+com.microsoft.vscode  c     all
+com.microsoft.vscode  h     all
+com.microsoft.vscode  cc    all
+com.microsoft.vscode  cpp   all
+com.microsoft.vscode  cxx   all
+com.microsoft.vscode  hpp   all
+com.microsoft.vscode  hxx   all
+# Python
+com.microsoft.vscode  py    all
+# Ruby
+com.microsoft.vscode  rb    all
+# Java
+com.microsoft.vscode  java  all
+# Go / Rust / Swift
+com.microsoft.vscode  go    all
+com.microsoft.vscode  rs    all
+com.microsoft.vscode  swift all
+# JavaScript / TypeScript
+com.microsoft.vscode  js    all
+com.microsoft.vscode  mjs   all
+com.microsoft.vscode  cjs   all
+com.microsoft.vscode  jsx   all
+com.microsoft.vscode  ts    all
+com.microsoft.vscode  tsx   all
+# Shell
+com.microsoft.vscode  sh    all
+com.microsoft.vscode  bash  all
+com.microsoft.vscode  zsh   all
+# Config / data
+com.microsoft.vscode  json  all
+com.microsoft.vscode  yaml  all
+com.microsoft.vscode  yml   all
+com.microsoft.vscode  toml  all
+# SQL
+com.microsoft.vscode  sql   all
+# Logs / config / dotenv
+com.microsoft.vscode  log   all
+com.microsoft.vscode  conf  all
+com.microsoft.vscode  ini   all
+com.microsoft.vscode  env   all
+com.microsoft.vscode  xml   all
+# Diffs / patches
+com.microsoft.vscode  patch all
+com.microsoft.vscode  diff  all
+# Web stylesheets (HTML stays with Chrome above)
+com.microsoft.vscode  css   all
+com.microsoft.vscode  scss  all
+# Markdown
+com.microsoft.vscode  net.daringfireball.markdown  all

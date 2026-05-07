@@ -78,6 +78,7 @@ must have been run first), and hands off to `bootstrap.sh`.
 3. `stow common` and `stow $DOTFILES_PROFILE` — symlinks dotfiles into `~`.
 4. `brew bundle` against `Brewfile.common` then `Brewfile.$PROFILE`.
 5. Runs `macos/defaults.sh`.
+6. Applies default-app associations from `macos/duti.list`.
 
 Re-run any time. All steps are idempotent.
 
@@ -153,6 +154,35 @@ run with `--capture-dock` and commit the diff.
 # Move the real file into the repo, then re-stow.
 mv ~/.tmux.conf ~/.dotfiles/common/.tmux.conf
 ~/.dotfiles/bootstrap.sh   # re-runs stow, restoring the symlink
+```
+
+## Adding a new default-app association
+
+`macos/duti.list` is the source of truth. No Finder UI needed.
+
+```bash
+# 1. Append a line to macos/duti.list:
+#      <bundle-id> <UTI-or-extension> <role>
+#    Roles: all | viewer | editor | shell | none
+#    Examples:
+#      com.microsoft.vscode  py   all
+#      com.google.chrome     pdf  viewer
+
+# 2. Apply it (idempotent — same step bootstrap.sh runs):
+duti -v ~/.dotfiles/macos/duti.list
+
+# 3. Confirm it stuck:
+duti -x py      # prints the .app path now associated with .py
+
+# Commit and you're done.
+```
+
+If you don't know an app's bundle ID:
+
+```bash
+osascript -e 'id of app "Visual Studio Code"'
+# or:
+mdls -name kMDItemCFBundleIdentifier -r "/Applications/Visual Studio Code.app"
 ```
 
 ## Profile guidance

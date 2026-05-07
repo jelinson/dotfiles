@@ -66,5 +66,11 @@ if [ -f "$DOTFILES/macos/defaults.$PROFILE.sh" ]; then
   bash "$DOTFILES/macos/defaults.$PROFILE.sh"
 fi
 
+# --- default-app associations (duti) ---
+if command -v duti >/dev/null 2>&1 && [ -s "$DOTFILES/macos/duti.list" ]; then
+  echo "==> Applying default-app associations from duti.list"
+  duti -v "$DOTFILES/macos/duti.list" || true
+fi
+
 echo
 echo "==> Bootstrap complete. Manual steps remaining: see README.md"
