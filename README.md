@@ -17,10 +17,12 @@ Personal macOS bootstrap. Replaces the new-laptop checklist Google Doc.
 │   └── Brewfile.work
 ├── macos/
 │   ├── defaults.common.sh    # `defaults write` seeds (always applied)
-│   ├── defaults.personal.sh  # personal-only (e.g. Dock contents)
-│   └── duti.list             # default-app associations
+│   ├── defaults.personal.sh  # personal-only (text replacements + Dock)
+│   ├── dock.personal.apps    # data file: Dock pinned apps, one per line
+│   ├── dock.personal.others  # data file: Dock pinned folders, one per line
+│   └── duti.list             # default-app associations (stub)
 └── scripts/
-    ├── drift.sh        # audit installed state vs. Brewfiles
+    ├── drift.sh        # audit brew + Dock vs. tracked state (--capture-dock to update)
     └── setup-ssh.sh    # one-time: generate ed25519 key, register with GitHub
 ```
 
@@ -120,22 +122,30 @@ replacement for the old Google Doc.
 - Google Meet / Zoom — Screen Recording, Camera, Microphone.
 - Anything else that prompts on first run.
 
-### Shell environment (not yet captured in repo)
-The following currently live outside the repo. Move them into `common/` as
-you stabilize them, then `bootstrap.sh` will symlink them automatically:
-- `.bashrc` / `.bash_profile` (aliases, color prompt, Python setup).
-- `.tmux.conf`.
-- `.gitconfig`.
+### Text replacements
+- System Settings → Keyboard → Text Replacements. Not tracked in repo
+  (entries contain personal email addresses).
+
+### Shell environment
+Tracked by stow:
+- `common/.bash_profile` — neutral parts (PS1, brew, NVM); sources `~/.bash_profile.local`.
+- `common/.bash_aliases`, `common/.gitconfig`, `common/.gitignore`, `common/.emacs`, `common/.sqliterc`.
+- `personal/.bash_profile.local` — personal paths (`proj`/`interviews`/`finance`/`hop`/antigravity).
+- `personal/.zshrc`.
+
+Not yet captured: `.tmux.conf`. Bring it in once stable.
 
 ## Drift audit
 
 ```bash
-~/.dotfiles/scripts/drift.sh                # checks personal profile
-~/.dotfiles/scripts/drift.sh work           # checks work profile
+~/.dotfiles/scripts/drift.sh                 # check brew + Dock (personal profile)
+~/.dotfiles/scripts/drift.sh work            # check work profile
+~/.dotfiles/scripts/drift.sh --capture-dock  # accept live Dock layout into the repo
 ```
 
-Reports declared-but-missing (need to install) and installed-but-undeclared
-(should be added to a Brewfile or removed). Run it weekly-ish.
+Reports declared-but-missing brew packages, installed-but-undeclared brew
+packages, and Dock divergence. Run weekly-ish. After GUI-rearranging the Dock,
+run with `--capture-dock` and commit the diff.
 
 ## Adding a new tracked dotfile
 

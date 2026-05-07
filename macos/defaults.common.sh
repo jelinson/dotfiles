@@ -1,31 +1,52 @@
 #!/usr/bin/env bash
 # macOS preference seeds. Idempotent — safe to re-run.
-# Add `defaults write` lines here as you discover prefs worth tracking.
-# Tip: capture a current value with `defaults read <domain> <key>`.
+# Captured from a known-good machine state.
 
 set -euo pipefail
 
-echo "==> macOS defaults"
+echo "==> macOS defaults: common"
 
-# --- iTerm2 ---
-# Quit when last window is closed (matches expected app lifecycle).
-defaults write com.googlecode.iterm2 QuitWhenAllWindowsClosed -bool true
+# --- Appearance ---
+defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
 
-# --- Stage Manager / wallpaper click ---
-# Click the wallpaper to reveal the desktop ONLY when Stage Manager is on.
-defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool false
+# --- Title bar / window behavior ---
+defaults write NSGlobalDomain AppleActionOnDoubleClick -string "Maximize"
+defaults write NSGlobalDomain AppleMiniaturizeOnDoubleClick -bool false
+defaults write NSGlobalDomain AppleMenuBarVisibleInFullscreen -bool false
+
+# --- Scroll & input ---
+defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false       # natural scroll OFF
+defaults write NSGlobalDomain com.apple.scrollwheel.scaling -float 0.125       # very slow mouse wheel
+defaults write NSGlobalDomain com.apple.sound.beep.feedback -int 0             # no beep on volume change
 
 # --- Finder ---
-# Show all filename extensions.
-defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+defaults write com.apple.finder AppleShowAllFiles -bool true
+defaults write NSGlobalDomain AppleShowAllExtensions -bool false
+
+# --- Dock ---
+defaults write com.apple.dock mru-spaces -bool false                           # don't auto-rearrange spaces
+
+# --- Stage Manager / wallpaper click ---
+defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool false
+
+# --- iTerm2 ---
+defaults write com.googlecode.iterm2 QuitWhenAllWindowsClosed -bool true
+
+# --- Trackpad (built-in + bluetooth) ---
+for domain in com.apple.AppleMultitouchTrackpad com.apple.driver.AppleBluetoothMultitouch.trackpad; do
+  defaults write "$domain" Clicking -bool true                                 # tap to click
+  defaults write "$domain" TrackpadThreeFingerDrag -bool false
+  defaults write "$domain" TrackpadThreeFingerTapGesture -int 0
+done
+
+# --- Mouse (built-in + bluetooth) ---
+for domain in com.apple.AppleMultitouchMouse com.apple.driver.AppleBluetoothMultitouch.mouse; do
+  defaults write "$domain" MouseButtonMode -string "OneButton"
+  defaults write "$domain" MouseTwoFingerDoubleTapGesture -int 3               # Mission Control
+done
 
 # --- Screenshots ---
-# Keep at default (~/Desktop). Override here if you decide otherwise:
-# mkdir -p "$HOME/Pictures/Screenshots"
-# defaults write com.apple.screencapture location "$HOME/Pictures/Screenshots"
-
-# Items from the original checklist that COULD be scripted but are pending
-# decisions on the desired values. See questions in commit/PR history. Once
-# decided, encode here and remove from README's manual section.
+defaults write com.apple.screencapture style -string "selection"
+defaults write com.apple.screencapture video -int 0
 
 echo "==> Defaults applied. Some apps need a relaunch to pick changes up."

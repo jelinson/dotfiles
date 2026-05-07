@@ -1,0 +1,37 @@
+# Personal-only paths and shortcuts. Sourced by common/.bash_profile.
+
+# Python 3.14 framework install (machine-specific; adjust on a new machine).
+if [ -d "/Library/Frameworks/Python.framework/Versions/3.14/bin" ]; then
+  export PATH="/Library/Frameworks/Python.framework/Versions/3.14/bin:$PATH"
+fi
+
+proj() { cd "$HOME/Documents/projects/${1:-.}"; }
+_proj_complete() {
+  local projects_dir="$HOME/Documents/projects"
+  COMPREPLY=($(compgen -W "$(ls "$projects_dir" 2>/dev/null)" -- "${COMP_WORDS[1]}"))
+}
+complete -F _proj_complete proj
+
+interviews() {
+  local base="$HOME/Documents/job/interviews"
+  if [ -n "$1" ]; then
+    cd "$base/companies/$1"
+  else
+    cd "$base"
+  fi
+}
+
+# Finance CLI.
+if [ -f "$HOME/Documents/projects/finance/finance.py" ]; then
+  alias finance="python3 $HOME/Documents/projects/finance/finance.py"
+  [ -f "$HOME/Documents/projects/finance/finance_completion.bash" ] \
+    && source "$HOME/Documents/projects/finance/finance_completion.bash"
+fi
+
+# Antigravity.
+[ -d "$HOME/.antigravity/antigravity/bin" ] \
+  && export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
+
+# Hop shortcuts.
+export HOP_DIR="$HOME/Documents/projects/hop"
+[ -f "$HOP_DIR/shell/hop.sh" ] && source "$HOP_DIR/shell/hop.sh"

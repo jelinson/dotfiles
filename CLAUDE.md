@@ -79,15 +79,3 @@ mv ~/.tmux.conf ~/.dotfiles/common/.tmux.conf
   Silicon Homebrew prefixes. `bootstrap.sh` does its own brew-prefix probe
   via `brew shellenv`.
 
-## What lives where, in one line each
-
-- `install.sh`, `bootstrap.sh` — entry points.
-- `common/`, `personal/`, `work/` — stow packages (mirror `$HOME`).
-- `brew/Brewfile.*` — Homebrew bundle inputs, split by profile.
-- `macos/defaults.common.sh` — `defaults write` seeds (always applied).
-- `macos/defaults.personal.sh` — personal-only macOS prefs (Dock layout).
-- `macos/duti.list` — default-app association stub.
-- `scripts/drift.sh` — `brew bundle check` + `cleanup --dry-run` audit.
-- `scripts/setup-ssh.sh` — one-time ed25519 key gen + `~/.ssh/config` keychain
-  persistence + `gh ssh-key add` registration. Required before SSH clone of
-  the (currently private) repo.

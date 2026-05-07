@@ -1,8 +1,11 @@
 # Personal-only. Apple ID sign-in (required by `mas`) is fine here; avoid on corp.
 
 brew "mas"
-brew "dockutil"   # used by macos/defaults.personal.sh to seed the Dock
+brew "dockutil"     # used by macos/defaults.personal.sh to seed the Dock
+brew "gemini-cli"   # personal Google account auth
 
+cask "anki"
+cask "claude"        # Claude desktop GUI (separate from claude-code CLI in common)
 cask "google-chrome"
 
 # 1Password 6 (legacy standalone). The App Store now ships v7+, so `mas` cannot

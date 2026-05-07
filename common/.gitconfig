@@ -1,0 +1,30 @@
+[user]
+	name = Julius Elinson
+	email = 981939+jelinson@users.noreply.github.com
+[core]
+	editor = emacs
+	excludesfile = ~/.gitignore
+
+[filter "media"]
+	required = true
+	clean = git media clean %f
+	smudge = git media smudge %f
+[push]
+	default = matching
+[credential]
+	helper = osxkeychain
+[filter "hawser"]
+	clean = git hawser clean %f
+	smudge = git hawser smudge %f
+	required = true
+[alias]
+        st = status -s
+        ch = checkout
+        sweep = !git fetch --prune && git branch -vv | grep \": gone]\" | awk '{print $1}' | xargs git branch -D 2>/dev/null; echo \"Sweep done.\"
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[init]
+	defaultBranch = main
