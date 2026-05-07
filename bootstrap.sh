@@ -45,6 +45,10 @@ echo "==> Stowing $PROFILE -> \$HOME"
 stow --dir="$DOTFILES" --target="$HOME" --restow "$PROFILE"
 
 # --- brew bundle ---
+# --adopt lets brew claim casks whose .app already exists from a non-brew install
+# (e.g. direct download). Harmless on a fresh Mac (nothing to adopt).
+export HOMEBREW_CASK_OPTS="--adopt"
+
 echo "==> brew bundle: common"
 brew bundle --file="$DOTFILES/brew/Brewfile.common"
 
