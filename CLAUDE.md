@@ -85,3 +85,6 @@ mv ~/.tmux.conf ~/.dotfiles/common/.tmux.conf
 - `macos/defaults.sh` — `defaults write` seeds.
 - `macos/duti.list` — default-app association stub.
 - `scripts/drift.sh` — `brew bundle check` + `cleanup --dry-run` audit.
+- `scripts/setup-ssh.sh` — one-time ed25519 key gen + `~/.ssh/config` keychain
+  persistence + `gh ssh-key add` registration. Required before SSH clone of
+  the (currently private) repo.

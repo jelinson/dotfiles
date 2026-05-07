@@ -19,32 +19,54 @@ Personal macOS bootstrap. Replaces the new-laptop checklist Google Doc.
 │   ├── defaults.sh     # `defaults write` seeds
 │   └── duti.list       # default-app associations
 └── scripts/
-    └── drift.sh        # audit installed state vs. Brewfiles
+    ├── drift.sh        # audit installed state vs. Brewfiles
+    └── setup-ssh.sh    # one-time: generate ed25519 key, register with GitHub
 ```
 
 ## New-machine setup
 
-One-liner from a fresh Mac:
+The repo is **private**, which means the curl-pipe one-liner won't work
+(both `raw.githubusercontent.com` and `git clone` need auth before the repo
+is reachable). Use the manual SSH path:
+
+```bash
+# 1. Install Xcode Command Line Tools (for git). A GUI dialog will appear.
+xcode-select --install
+
+# 2. Generate an SSH key, copy the pubkey, and add it to GitHub.
+#    Easiest if `gh` is installed + authed (brew install gh && gh auth login),
+#    in which case the script can register the key for you.
+bash <(curl -fsSL https://raw.githubusercontent.com/jelinson/dotfiles/main/scripts/setup-ssh.sh) \
+  || {
+    # Fallback: do it by hand. Pubkey will be on your clipboard via pbcopy.
+    ssh-keygen -t ed25519 -C "you@example.com"
+    pbcopy < ~/.ssh/id_ed25519.pub
+    open https://github.com/settings/ssh/new
+  }
+
+# 3. Clone over SSH and bootstrap.
+git clone git@github.com:jelinson/dotfiles.git ~/.dotfiles
+~/.dotfiles/bootstrap.sh
+
+# 4. Re-run setup-ssh.sh to populate ~/.ssh/config (keychain persistence)
+#    if you skipped it in step 2.
+~/.dotfiles/scripts/setup-ssh.sh
+```
+
+To select a profile (default `personal`):
+
+```bash
+DOTFILES_PROFILE=work ~/.dotfiles/bootstrap.sh
+```
+
+### If the repo is ever made public
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/jelinson/dotfiles/main/install.sh | bash
 ```
 
-That triggers the Xcode CLT GUI installer (for `git`), clones this repo to
-`~/.dotfiles`, and hands off to `bootstrap.sh`.
-
-To select a profile (default is `personal`):
-
-```bash
-DOTFILES_PROFILE=work curl -fsSL .../install.sh | bash
-```
-
-Or, after cloning manually:
-
-```bash
-git clone https://github.com/jelinson/dotfiles.git ~/.dotfiles
-DOTFILES_PROFILE=personal ~/.dotfiles/bootstrap.sh
-```
+`install.sh` triggers the CLT installer, clones via SSH (so `setup-ssh.sh`
+must have been run first), and hands off to `bootstrap.sh`.
 
 ## What `bootstrap.sh` does
 

@@ -5,7 +5,7 @@
 
 set -euo pipefail
 
-REPO_URL="${DOTFILES_REPO:-https://github.com/jelinson/dotfiles.git}"
+REPO_URL="${DOTFILES_REPO:-git@github.com:jelinson/dotfiles.git}"
 TARGET="${DOTFILES_DIR:-$HOME/.dotfiles}"
 
 if ! xcode-select -p >/dev/null 2>&1; then
