@@ -1,0 +1,10 @@
+# Personal-only. Apple ID sign-in (required by `mas`) is fine here; avoid on corp.
+
+brew "mas"
+
+cask "google-chrome"
+
+# 1Password 6 (legacy standalone). The App Store now ships v7+, so `mas` cannot
+# fetch v6 directly — recover from "Purchased" in the App Store account dropdown.
+# App Store ID kept here for reference / future drift detection.
+# mas "1Password 6", id: 443987910

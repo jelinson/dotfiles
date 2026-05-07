@@ -1,0 +1,7 @@
+# Default-app associations for `duti -v duti.list`.
+# Format: <bundle-id> <UTI-or-extension> <role>
+# Example:
+#   com.sublimetext.4 .md all
+#   com.google.Chrome public.html viewer
+#
+# Populate once you decide which extensions you want pinned.

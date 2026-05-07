@@ -1,0 +1,9 @@
+# Universally welcome on any Mac (personal or work).
+
+brew "tmux"
+brew "duti"
+brew "emacs"
+
+cask "iterm2"
+cask "sublime-text"
+cask "elgato-control-center"
