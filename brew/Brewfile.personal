@@ -1,6 +1,7 @@
 # Personal-only. Apple ID sign-in (required by `mas`) is fine here; avoid on corp.
 
 brew "mas"
+brew "dockutil"   # used by macos/defaults.personal.sh to seed the Dock
 
 cask "google-chrome"
 

@@ -20,9 +20,11 @@ Three orthogonal layers, each driven by a different mechanism:
   universally welcome on any Mac; `mas` and anything that requires personal
   Apple ID sign-in stays in `Brewfile.personal`; `Brewfile.work` is for
   things corp MDM does NOT already provide (typically sparse).
-- **macOS preferences** — `macos/defaults.sh` is a flat list of idempotent
-  `defaults write` calls. `macos/duti.list` is a stub for default-app
-  associations.
+- **macOS preferences** — `macos/defaults.common.sh` is a flat list of
+  idempotent `defaults write` calls applied on every machine. Profile-specific
+  prefs live in `macos/defaults.$PROFILE.sh` (currently `defaults.personal.sh`
+  uses `dockutil` to seed the Dock). `macos/duti.list` is a stub for
+  default-app associations.
 
 The two layers stay decoupled: stowed config files don't depend on Brewfile
 state and vice versa. Either can be applied in isolation.
@@ -82,7 +84,8 @@ mv ~/.tmux.conf ~/.dotfiles/common/.tmux.conf
 - `install.sh`, `bootstrap.sh` — entry points.
 - `common/`, `personal/`, `work/` — stow packages (mirror `$HOME`).
 - `brew/Brewfile.*` — Homebrew bundle inputs, split by profile.
-- `macos/defaults.sh` — `defaults write` seeds.
+- `macos/defaults.common.sh` — `defaults write` seeds (always applied).
+- `macos/defaults.personal.sh` — personal-only macOS prefs (Dock layout).
 - `macos/duti.list` — default-app association stub.
 - `scripts/drift.sh` — `brew bundle check` + `cleanup --dry-run` audit.
 - `scripts/setup-ssh.sh` — one-time ed25519 key gen + `~/.ssh/config` keychain

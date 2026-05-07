@@ -16,8 +16,9 @@ Personal macOS bootstrap. Replaces the new-laptop checklist Google Doc.
 │   ├── Brewfile.personal
 │   └── Brewfile.work
 ├── macos/
-│   ├── defaults.sh     # `defaults write` seeds
-│   └── duti.list       # default-app associations
+│   ├── defaults.common.sh    # `defaults write` seeds (always applied)
+│   ├── defaults.personal.sh  # personal-only (e.g. Dock contents)
+│   └── duti.list             # default-app associations
 └── scripts/
     ├── drift.sh        # audit installed state vs. Brewfiles
     └── setup-ssh.sh    # one-time: generate ed25519 key, register with GitHub
@@ -92,8 +93,7 @@ replacement for the old Google Doc.
 ### System settings
 - Enable Find My.
 - Touch ID — enroll fingerprints.
-- Night Shift — Displays → Night Shift schedule.
-- Dock — pin/remove apps as desired (no scripted seed yet).
+- Night Shift — Displays → Night Shift schedule (currently default-off; not yet scripted).
 
 ### Displays
 - Right monitor: rotate 270°.
@@ -105,15 +105,12 @@ replacement for the old Google Doc.
 
 ### External keyboard
 - Swap Control and Command (System Settings → Keyboard → Modifier Keys, per device).
-- Home/End — handled automatically by the symlinked
-  `~/Library/KeyBindings/DefaultKeyBinding.dict` (stowed from `common/`).
 
 ### Apps
 - **Chrome** — sign in, let extensions/profiles sync.
 - **1Password** — sign in. **v6, not v7**: recover from App Store →
   account dropdown → Purchased (the listing now ships v7+).
-- **iTerm2** — `QuitWhenAllWindowsClosed` is set automatically; import any
-  saved color preset / profile manually.
+- **iTerm2** — import saved color preset / profile if you have one stashed.
 - **Sublime Text** — sign in for license, import User folder if you have one.
 - **Elgato Control Center** — pair lights/keys.
 - **Emacs** — installed via Homebrew; bring `.emacs` / `init.el` into

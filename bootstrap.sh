@@ -54,8 +54,13 @@ if [ -s "$DOTFILES/brew/Brewfile.$PROFILE" ]; then
 fi
 
 # --- macOS defaults ---
-echo "==> Applying macOS defaults"
-bash "$DOTFILES/macos/defaults.sh"
+echo "==> Applying macOS defaults: common"
+bash "$DOTFILES/macos/defaults.common.sh"
+
+if [ -f "$DOTFILES/macos/defaults.$PROFILE.sh" ]; then
+  echo "==> Applying macOS defaults: $PROFILE"
+  bash "$DOTFILES/macos/defaults.$PROFILE.sh"
+fi
 
 echo
 echo "==> Bootstrap complete. Manual steps remaining: see README.md"

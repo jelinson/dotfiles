@@ -24,14 +24,8 @@ defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 # mkdir -p "$HOME/Pictures/Screenshots"
 # defaults write com.apple.screencapture location "$HOME/Pictures/Screenshots"
 
-# --- TODO: items from the original checklist still to encode ---
-# Manual (no `defaults write` equivalent — see README):
-# - Wifi, Apple ID, Gmail sign-in
-# - Find My, Touch ID, Bluetooth pairing
-# - Night Shift schedule
-# - Display rotation (right monitor 270°), main display assignment
-# - External keyboard: Control/Command swap (per-device, GUI only)
-# - Privacy permissions for Meet/Zoom (Screen Recording, Camera, Mic)
-# - Dock contents
+# Items from the original checklist that COULD be scripted but are pending
+# decisions on the desired values. See questions in commit/PR history. Once
+# decided, encode here and remove from README's manual section.
 
 echo "==> Defaults applied. Some apps need a relaunch to pick changes up."
