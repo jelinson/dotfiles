@@ -57,6 +57,19 @@ if [ -s "$DOTFILES/brew/Brewfile.$PROFILE" ]; then
   brew bundle --file="$DOTFILES/brew/Brewfile.$PROFILE"
 fi
 
+# --- rbenv: install latest stable Ruby if not already set ---
+if command -v rbenv >/dev/null 2>&1; then
+  LATEST_RUBY=$(rbenv install --list 2>/dev/null | grep -E '^\s*[0-9]+\.[0-9]+\.[0-9]+\s*$' | tail -1 | tr -d ' ')
+  CURRENT_RUBY=$(rbenv global 2>/dev/null || true)
+  if [ "$CURRENT_RUBY" != "$LATEST_RUBY" ]; then
+    echo "==> Installing Ruby $LATEST_RUBY"
+    rbenv install --skip-existing "$LATEST_RUBY"
+    rbenv global "$LATEST_RUBY"
+  else
+    echo "==> Ruby $CURRENT_RUBY already set as global"
+  fi
+fi
+
 # --- macOS defaults ---
 echo "==> Applying macOS defaults: common"
 bash "$DOTFILES/macos/defaults.common.sh"
