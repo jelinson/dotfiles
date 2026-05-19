@@ -1,5 +1,7 @@
 # Personal-only. Apple ID sign-in (required by `mas`) is fine here; avoid on corp.
 
+brew "rbenv"
+brew "ruby-build"
 brew "mas"
 brew "dockutil"     # used by macos/defaults.personal.sh to seed the Dock
 brew "gemini-cli"   # personal Google account auth

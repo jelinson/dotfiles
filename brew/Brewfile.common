@@ -1,7 +1,5 @@
 # Universally welcome on any Mac (personal or work).
 
-brew "rbenv"
-brew "ruby-build"
 brew "tmux"
 brew "duti"
 brew "emacs"

@@ -25,6 +25,4 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-command -v rbenv &>/dev/null && eval "$(rbenv init - bash)"
-
 [ -f ~/.bash_profile.local ] && source ~/.bash_profile.local

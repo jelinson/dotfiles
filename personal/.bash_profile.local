@@ -5,6 +5,8 @@ if [ -d "/Library/Frameworks/Python.framework/Versions/3.14/bin" ]; then
   export PATH="/Library/Frameworks/Python.framework/Versions/3.14/bin:$PATH"
 fi
 
+command -v rbenv &>/dev/null && eval "$(rbenv init - bash)"
+
 proj() { cd "$HOME/Documents/projects/${1:-.}"; }
 _proj_complete() {
   local projects_dir="$HOME/Documents/projects"
