@@ -35,7 +35,7 @@ while IFS= read -r path; do
   case "$path" in \#*) continue ;; esac
   expanded="${path/#\~/$HOME}"
   if [ -e "$expanded" ]; then
-    dockutil --add "$expanded" --view list --display folder --no-restart >/dev/null
+    dockutil --add "$expanded" --view grid --display folder --sort name --no-restart >/dev/null
   fi
 done < "$DIR/dock.personal.others"
 
