@@ -9,6 +9,9 @@ brew "gemini-cli"   # personal Google account auth
 cask "anki"
 cask "claude"        # Claude desktop GUI (separate from claude-code CLI in common)
 cask "google-chrome"
+cask "iterm2"            # corp Self Service usually provisions this
+cask "sublime-text"      # personal license; corp dev env is typically VS Code
+cask "visual-studio-code" # corp MDM typically provisions this
 
 # 1Password 6 (legacy standalone). The App Store now ships v7+, so `mas` cannot
 # fetch v6 directly — recover from "Purchased" in the App Store account dropdown.

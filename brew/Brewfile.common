@@ -1,4 +1,7 @@
 # Universally welcome on any Mac (personal or work).
+# Corp laptops typically provide editor + terminal via Self Service / MDM, so
+# iterm2 / sublime-text / visual-studio-code live in Brewfile.personal instead.
+# If a corp machine genuinely lacks one, add it to Brewfile.work.
 
 brew "tmux"
 brew "duti"
@@ -10,6 +13,3 @@ brew "poppler"
 
 cask "claude-code"
 cask "elgato-control-center"
-cask "iterm2"
-cask "sublime-text"
-cask "visual-studio-code"
