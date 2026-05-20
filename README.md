@@ -56,11 +56,29 @@ git clone git@github.com:jelinson/dotfiles.git ~/.dotfiles
 ~/.dotfiles/scripts/setup-ssh.sh
 ```
 
-To select a profile (default `personal`):
+## Profile selection
+
+Bootstrap targets one of two profiles: `personal` (default) or `work`. Three
+equivalent forms:
 
 ```bash
-DOTFILES_PROFILE=work ~/.dotfiles/bootstrap.sh
+~/.dotfiles/bootstrap.sh                       # personal (default)
+~/.dotfiles/bootstrap.sh work                  # positional arg
+DOTFILES_PROFILE=work ~/.dotfiles/bootstrap.sh # env var
 ```
+
+Precedence: positional arg > env var > default. Anything other than
+`personal` or `work` is rejected. The first-line `==> Profile:` banner makes
+the choice visible at the top of every run.
+
+The profile controls (a) which `Brewfile.$PROFILE` is applied on top of
+`Brewfile.common`, and (b) which secondary stow package (`personal/` or
+`work/`) is symlinked into `$HOME` after `common/`.
+
+On a work profile's **first run**, bootstrap prompts for git identity (name +
+email) because `work/.gitconfig.local` is not pre-populated — corp creds don't
+belong in a shared repo by default. Leave the name blank to defer; re-run
+bootstrap or write `work/.gitconfig.local` by hand later.
 
 ### If the repo is ever made public
 
@@ -131,6 +149,14 @@ Homebrew installs most apps automatically. Steps below cover sign-in, licensing,
 ### Text replacements
 - [ ] System Settings → Keyboard → Text Replacements. Not tracked in repo
   (entries contain personal email addresses).
+
+### Shell (set login shell to bash)
+- [ ] **`chsh -s /bin/bash`** — macOS defaults to zsh, but all the tracked shell
+  config (`common/.bash_profile`, `common/.bash_aliases`,
+  `personal/.bash_profile.local`) is bash-only. iTerm2 follows the OS login
+  shell by default, so this single command covers iTerm + Terminal + any other
+  emulator. Requires Touch ID / password; can't be scripted. Verify with
+  `echo $SHELL` after a new login.
 
 ### Shell environment
 Tracked by stow:
