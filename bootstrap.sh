@@ -58,13 +58,17 @@ if [ -s "$DOTFILES/brew/Brewfile.$PROFILE" ]; then
 fi
 
 # --- rbenv: install latest stable Ruby if not already set (personal only) ---
+# "Latest stable" here means: the highest X.Y.Z where Y >= 1. This excludes
+# brand-new majors (4.0.x, 5.0.x) until they've shipped at least one minor
+# release, giving them time to settle. Drop the [1-9] in the regex to track
+# absolute-latest instead.
 if [ "$PROFILE" = personal ] && command -v rbenv >/dev/null 2>&1; then
-  LATEST_RUBY=$(rbenv install --list 2>/dev/null | grep -E '^\s*[0-9]+\.[0-9]+\.[0-9]+\s*$' | tail -1 | tr -d ' ')
+  STABLE_RUBY=$(rbenv install --list 2>/dev/null | grep -E '^\s*[0-9]+\.[1-9][0-9]*\.[0-9]+\s*$' | tail -1 | tr -d ' ')
   CURRENT_RUBY=$(rbenv global 2>/dev/null || true)
-  if [ "$CURRENT_RUBY" != "$LATEST_RUBY" ]; then
-    echo "==> Installing Ruby $LATEST_RUBY"
-    rbenv install --skip-existing "$LATEST_RUBY"
-    rbenv global "$LATEST_RUBY"
+  if [ "$CURRENT_RUBY" != "$STABLE_RUBY" ]; then
+    echo "==> Installing Ruby $STABLE_RUBY"
+    rbenv install --skip-existing "$STABLE_RUBY"
+    rbenv global "$STABLE_RUBY"
   else
     echo "==> Ruby $CURRENT_RUBY already set as global"
   fi
