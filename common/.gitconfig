@@ -1,9 +1,8 @@
-[user]
-	name = Julius Elinson
-	email = 981939+jelinson@users.noreply.github.com
 [core]
 	editor = emacs
 	excludesfile = ~/.gitignore
+[include]
+	path = ~/.gitconfig.local
 
 [filter "media"]
 	required = true

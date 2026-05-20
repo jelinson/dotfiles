@@ -85,5 +85,10 @@ if command -v duti >/dev/null 2>&1 && [ -s "$DOTFILES/macos/duti.list" ]; then
   duti -v "$DOTFILES/macos/duti.list" || true
 fi
 
+# --- gh auth ---
+if ! gh auth status -h github.com &>/dev/null; then
+  echo "⚠ gh: not authenticated with github.com. Run 'gh auth login' when your account is ready."
+fi
+
 echo
 echo "==> Bootstrap complete. Manual steps remaining: see README.md"

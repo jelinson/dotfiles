@@ -92,6 +92,9 @@ replacement for the old Google Doc.
 - Apple ID — System Settings → Apple ID. (Personal-only on a corp machine
   unless policy explicitly allows it.)
 - Gmail sign-in.
+- **GitHub CLI auth** — `gh auth login`. Bootstrap warns if skipped but continues.
+  `~/.config/gh/hosts.yml` (OAuth tokens) is never tracked; re-auth on each new machine.
+  For a work machine with a separate Figma account: `gh auth login`, then verify with `gh auth status`.
 
 ### System settings
 - Enable Find My.
@@ -131,8 +134,11 @@ replacement for the old Google Doc.
 Tracked by stow:
 - `common/.bash_profile` — neutral parts (PS1, brew, NVM); sources `~/.bash_profile.local`.
 - `common/.bash_aliases`, `common/.gitconfig`, `common/.gitignore`, `common/.emacs`, `common/.sqliterc`.
+- `common/.gitconfig` — aliases, core, filters. No identity. Includes `~/.gitconfig.local`.
+- `personal/.gitconfig.local` — git identity (`[user]` name + email) for the personal account.
 - `personal/.bash_profile.local` — personal paths (`proj`/`interviews`/`finance`/`hop`/antigravity).
 - `personal/.zshrc`.
+- `personal/.config/gh/config.yml` — gh preferences (aliases, protocol, etc). **Not** `hosts.yml` — that holds OAuth tokens and is never tracked.
 
 Not yet captured: `.tmux.conf`. Bring it in once stable.
 
