@@ -88,52 +88,54 @@ Done by hand on every new machine. Keep this list current — it's the canonical
 replacement for the old Google Doc.
 
 ### Network & accounts
-- Wifi.
-- Apple ID — System Settings → Apple ID. (Personal-only on a corp machine
+- [ ] Wifi.
+- [ ] Apple ID — System Settings → Apple ID. (Personal-only on a corp machine
   unless policy explicitly allows it.)
-- Gmail sign-in.
-- **GitHub CLI auth** — `gh auth login`. Bootstrap warns if skipped but continues.
+- [ ] Gmail sign-in.
+- [ ] **GitHub CLI auth** — `gh auth login`. Bootstrap warns if skipped but continues.
   `~/.config/gh/hosts.yml` (OAuth tokens) is never tracked; re-auth on each new machine.
   For a work machine with a separate Figma account: `gh auth login`, then verify with `gh auth status`.
 
 ### System settings
-- Enable Find My.
-- Touch ID — enroll fingerprints.
-- Night Shift — Displays → Night Shift schedule (currently default-off; not yet scripted).
+- [ ] Enable Find My.
+- [ ] Touch ID — enroll fingerprints.
+- [ ] Night Shift — Displays → Night Shift schedule (currently default-off; not yet scripted).
 
 ### Displays
-- Right monitor: rotate 270°.
-- Set the center monitor as main (drag the menu bar in Displays prefs).
+- [ ] Right monitor: rotate 270°.
+- [ ] Set the center monitor as main (drag the menu bar in Displays prefs).
 
 ### Bluetooth
-- Pair mouse / trackpad / keyboard / Elgato.
-- Pair home headphones (long-hold the button to enter pairing mode).
+- [ ] Mouse.
+- [ ] Elgato stream deck / lights.
+- [ ] Headphones (long-hold the button to enter pairing mode).
 
 ### External keyboard
-- Swap Control and Command (System Settings → Keyboard → Modifier Keys, per device).
+- [ ] Swap Control and Command (System Settings → Keyboard → Modifier Keys, per device).
 
 ### Apps
-- **Chrome** — sign in, let extensions/profiles sync.
-- **1Password** — sign in. **v6, not v7**: recover from App Store →
-  account dropdown → Purchased (the listing now ships v7+).
-- **iTerm2** — import saved color preset / profile if you have one stashed.
-- **Sublime Text** — sign in for license, import User folder if you have one.
-- **Elgato Control Center** — pair lights/keys.
-- **Emacs** — installed via Homebrew; bring `.emacs` / `init.el` into
-  `common/` once captured.
+Homebrew installs most apps automatically. Steps below cover sign-in, licensing, or profile import after install.
+
+- [ ] **Chrome** *(Homebrew — personal)* — sign in, let extensions/profiles sync.
+- [ ] **1Password** *(manual — App Store, Purchased tab)* — **v6, not v7**: the listing now ships v7+;
+  recover v6 from account dropdown → Purchased.
+- [ ] **iTerm2** *(Homebrew — common)* — import saved color preset / profile if you have one stashed.
+- [ ] **Sublime Text** *(Homebrew — common)* — sign in for license, import User folder if you have one.
+- [ ] **Elgato Control Center** *(Homebrew — common)* — pair lights/keys after Bluetooth step above.
+- [ ] **Emacs** *(Homebrew — common)* — bring `.emacs` / `init.el` into `common/` once captured.
 
 ### Permissions (Privacy & Security)
-- Google Meet / Zoom — Screen Recording, Camera, Microphone.
-- Anything else that prompts on first run.
+- [ ] Google Meet / Zoom — Screen Recording, Camera, Microphone.
+- [ ] Anything else that prompts on first run.
 
 ### Text replacements
-- System Settings → Keyboard → Text Replacements. Not tracked in repo
+- [ ] System Settings → Keyboard → Text Replacements. Not tracked in repo
   (entries contain personal email addresses).
 
 ### Shell environment
 Tracked by stow:
 - `common/.bash_profile` — neutral parts (PS1, brew, NVM); sources `~/.bash_profile.local`.
-- `common/.bash_aliases`, `common/.gitconfig`, `common/.gitignore`, `common/.emacs`, `common/.sqliterc`.
+- `common/.bash_aliases`, `common/.gitignore`, `common/.emacs`, `common/.sqliterc`.
 - `common/.gitconfig` — aliases, core, filters. No identity. Includes `~/.gitconfig.local`.
 - `personal/.gitconfig.local` — git identity (`[user]` name + email) for the personal account.
 - `personal/.bash_profile.local` — personal paths (`proj`/`interviews`/`finance`/`hop`/antigravity).
