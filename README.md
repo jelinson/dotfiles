@@ -127,6 +127,10 @@ replacement for the old Google Doc.
 - [ ] Mouse.
 - [ ] Elgato stream deck / lights.
 - [ ] Headphones (long-hold the button to enter pairing mode).
+- [ ] AirPods — on a corp machine without personal iCloud sign-in, Handoff
+  won't auto-pair them. Open the case lid next to the Mac and hold the
+  back button until the LED flashes white, then pair from
+  System Settings → Bluetooth.
 
 ### External keyboard
 - [ ] Swap Control and Command (System Settings → Keyboard → Modifier Keys, per device).
@@ -149,6 +153,14 @@ Homebrew installs most apps automatically. Steps below cover sign-in, licensing,
 ### Text replacements
 - [ ] System Settings → Keyboard → Text Replacements. Not tracked in repo
   (entries contain personal email addresses).
+
+### New corp Gmail account
+First-time setup for a fresh corp Gmail account in the browser. Per-account
+state, not scriptable.
+- [ ] Settings → General → **Keyboard shortcuts on**.
+- [ ] Settings → General → **Theme: Dark**.
+- [ ] Settings → General → **Density: Comfortable**.
+- [ ] Settings → Chat and Meet → set both **Chat** and **Meet** to *Off*.
 
 ### Shell (set login shell to bash)
 - [ ] **`chsh -s /bin/bash`** — macOS defaults to zsh, but all the tracked shell

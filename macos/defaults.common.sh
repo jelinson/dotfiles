@@ -8,11 +8,20 @@ echo "==> macOS defaults: common"
 
 # --- Appearance ---
 defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
+defaults write com.apple.universalaccess reduceTransparency -bool true        # opaque menubar/dock
 
 # --- Title bar / window behavior ---
 defaults write NSGlobalDomain AppleActionOnDoubleClick -string "Maximize"
 defaults write NSGlobalDomain AppleMiniaturizeOnDoubleClick -bool false
 defaults write NSGlobalDomain AppleMenuBarVisibleInFullscreen -bool false
+
+# --- Menu bar / Control Center ---
+defaults write com.apple.controlcenter "NSStatusItem Visible Sound" -bool true # always show volume
+
+# --- Mission Control / Spaces ---
+# Disable "Displays have separate Spaces" — one space spans all monitors.
+# Requires logout to take effect.
+defaults write com.apple.spaces spans-displays -bool true
 
 # --- Scroll & input ---
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false       # natural scroll OFF
